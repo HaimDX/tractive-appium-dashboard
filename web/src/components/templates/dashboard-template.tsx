@@ -29,6 +29,7 @@ import { setSelectedBuild } from "../../store/actions/build-actions";
 import { extractBuildIdFromUrl } from "../../utils/utility";
 import { RootState } from "../../store";
 import Session from "../../interfaces/session";
+import { Header } from "../UI/organisms/header/header";
 
 function extractSessionidFromUrl(url: string): string | null {
   const matches = url.match(new RegExp(/dashboard\/session\/(.*)/));
@@ -108,13 +109,13 @@ export default function DashboardTemplate() {
   }, [buildIdFromUrl, builds, location.pathname]);
 
   return (
+    <>
     <SerialLayout>
       <Row height={`${APP_HEADER_HEIGHT}px`}>
-        <AppHeader />
+        <Header/>
       </Row>
       <Row height={`calc(100vh - ${APP_HEADER_HEIGHT}px)`}>
         <ParallelLayout>
-
           {/** Build List View **/}
           <Column grid={2.5}>
             <BuildList />
@@ -145,5 +146,6 @@ export default function DashboardTemplate() {
         </ParallelLayout>
       </Row>
     </SerialLayout>
+    </>
   );
 }
