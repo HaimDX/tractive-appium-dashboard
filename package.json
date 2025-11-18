@@ -1,5 +1,5 @@
 {
-  "name": "appium-dashboard-tractive",
+  "name": "tractive-appium-dashboard",
   "version": "1.23.0",
   "description": "Appium plugin to view mobile tests on the device farm",
   "main": "lib/index.js",
@@ -9,7 +9,7 @@
     "clean:cache": "node ./scripts/cleanup-cache-dir.js",
     "postinstall": "(node ./scripts/is-prod.js || tsc) && npm run sequelize:migrate",
     "i": "tsc && appium plugin install --source=local $(pwd)",
-    "start-appium": "appium --use-plugins=appium-dashboard --relaxed-security",
+    "start-appium": "appium --use-plugins=tractive-appium-dashboard --relaxed-security",
     "remove": "appium plugin uninstall appium-dashboard",
     "build": "tsc"
   },
@@ -21,7 +21,7 @@
   "author": "",
   "license": "ISC",
   "appium": {
-    "pluginName": "appium-dashboard-tractive",
+    "pluginName": "tractive-appium-dashboard",
     "mainClass": "AppiumDashboardPlugin"
   },
   "dependencies": {
