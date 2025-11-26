@@ -12,8 +12,11 @@ export class BuildController extends BaseController {
     router.get("/", this.getBuilds.bind(this));
     router.get("/:build_id/sessions", this.getSessionsForBuild.bind(this));
 
-    //New route for fetching a single build by name
+    //route for fetching a single build by name
     router.get("/by-name", this.getBuildByName.bind(this));
+
+    //route for cleanup of retried sessions that have successful counterparts
+    router.post("/:build_id/cleanup-retried", this.cleanupRetriedSessionsForBuild.bind(this));
   }
 
   public async getBuilds(request: Request, response: Response, next: NextFunction) {
@@ -128,6 +131,89 @@ export class BuildController extends BaseController {
       };
 
       this.sendSuccessResponse(response, data);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  /**
+   * Clean up build sessions that were retried and eventually succeeded
+   */
+  public async cleanupRetriedSessionsForBuild(
+    request: Request,
+    response: Response,
+    next: NextFunction
+  ) {
+    const { build_id } = request.params as any;
+
+    if (!build_id) {
+      return this.sendFailureResponse(response, "Missing required parameter: build_id", 400);
+    }
+
+    try {
+      //Find all RETRIED sessions for this build
+      const retriedSessions = await Session.findAll({
+        where: {
+          build_id,
+          session_status: "RETRIED" ,
+        },
+      });
+
+      if (!retriedSessions.length) {
+        return this.sendSuccessResponse(response, {
+          build_id,
+          deleted_count: 0,
+          message: "No retried sessions found for this build.",
+        });
+      }
+
+      //Collect unique test names from retried sessions
+      const retriedNames = _.uniq(retriedSessions.map((s: any) => s.name).filter(Boolean));
+
+      if (!retriedNames.length) {
+        return this.sendSuccessResponse(response, {
+          build_id,
+          deleted_count: 0,
+          message: "No test names for retried sessions found for this build.",
+        });
+      }
+
+      //For those names, find PASSED sessions within the same build
+      const passedSessions = await Session.findAll({
+        where: {
+          build_id,
+          name: { [Op.in]: retriedNames },
+          session_status: "PASSED",
+        },
+        attributes: ["name"],
+        group: ["name"],
+      });
+
+      const namesWithPassed = new Set(passedSessions.map((s: any) => s.name));
+
+      if (!namesWithPassed.size) {
+        return this.sendSuccessResponse(response, {
+          build_id,
+          deleted_count: 0,
+          message:
+            "No passed sessions found for any retried test names in this build. Nothing to delete.",
+        });
+      }
+
+      //Delete RETRIED sessions whose name has at least one PASSED session
+      const deletedCount = await Session.destroy({
+        where: {
+          build_id,
+          session_status: "RETRIED",
+          name: { [Op.in]: Array.from(namesWithPassed) },
+        },
+      });
+
+      return this.sendSuccessResponse(response, {
+        build_id,
+        deleted_count: deletedCount,
+        names_with_passed: Array.from(namesWithPassed),
+      });
     } catch (error) {
       next(error);
     }
