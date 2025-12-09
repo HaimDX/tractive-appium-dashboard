@@ -9,6 +9,7 @@ export interface Config {
   screenshotSavePath: string;
   logFilePath: string;
   takeScreenshotsFor: Array<string>;
+  dontSaveResponseForCommands: Array<string>;
 }
 
 export let config = {
@@ -18,4 +19,5 @@ export let config = {
   screenshotSavePath: path.join(basePath, "screen-shots"),
   logFilePath: path.join(basePath, "appium-dashboard-plugin.log"),
   takeScreenshotsFor: ["click", "setUrl", "setValue", "performActions"],
+  dontSaveResponseForCommands : ["getPageSource"]
 };

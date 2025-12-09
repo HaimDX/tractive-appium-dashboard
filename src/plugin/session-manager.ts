@@ -377,6 +377,12 @@ class SessionManager {
     return true;
   }
 
+  /*
+    Save command logs to a database.
+     1. Parse the command log using the commandParser
+     2. Save the parsed log to a database
+     Note: For get page source command, we are not saving the whole result for efficiency reasons
+   */
   private async saveCommandLog(command: AppiumCommand, response: any) {
     try {
       if (typeof this.commandParser[command.commandName as keyof CommandParser] == "function") {
@@ -412,6 +418,10 @@ class SessionManager {
           end_time: command.endTime,
         });
 
+        //trim response for heavy response commands like getPageSource
+        if( this.config.dontSaveResponseFor.indexOf(command.commandName) <  0){
+          parsedLog.response = "trimmed for efficiency";
+        }
         await commandLogsModel.create(parsedLog as any);
       }
     } catch (err) {
