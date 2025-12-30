@@ -393,6 +393,8 @@ class SessionManager {
           response
         );
         let screenShotPath = null;
+
+        //decide if the command needs a screenshot
         if (this.config.takeScreenshotsFor.indexOf(command.commandName) >= 0) {
           let screenShotbase64 = await takeScreenShot(command.driver, this.sessionInfo.session_id);
           if (screenShotbase64.value && typeof screenShotbase64.value === "string") {
@@ -419,7 +421,9 @@ class SessionManager {
         });
 
         //trim response for heavy response commands like getPageSource
-        if( this.config.dontSaveResponseFor.indexOf(command.commandName) <  0){
+        logger.info(`Deciding if we need to trim response for command for ${command.commandName} command in session ${this.sessionInfo.session_id}`);
+        if( this.config.dontSaveResponseForCommands.indexOf(command.commandName) <  0){
+          logger.info(`Trimming response for command for ${command.commandName} command in session ${this.sessionInfo.session_id}`);
           parsedLog.response = "trimmed for efficiency";
         }
         await commandLogsModel.create(parsedLog as any);
