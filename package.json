@@ -1,6 +1,6 @@
 {
   "name": "tractive-appium-dashboard",
-  "version": "1.26.0",
+  "version": "1.26.1",
   "description": "Appium plugin to view mobile tests on the device farm",
   "main": "lib/index.js",
   "scripts": {
