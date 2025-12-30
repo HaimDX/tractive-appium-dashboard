@@ -400,11 +400,11 @@ class SessionManager {
           if (screenShotbase64.value && typeof screenShotbase64.value === "string") {
             screenShotPath = path.join(this.config.screenshotSavePath, this.sessionInfo.session_id, `${uuidv4()}.jpg`);
             fs.writeFileSync(screenShotPath, screenShotbase64.value, "base64");
-            logger.info(
+            pluginLogger.info(
               `Screen shot saved for ${command.commandName} command in session ${this.sessionInfo.session_id}`
             );
           } else {
-            logger.error(
+            pluginLogger.error(
               `Screen shot not saved for ${command.commandName} command in session ${
                 this.sessionInfo.session_id
               } .response ${JSON.stringify(screenShotbase64.value)}`
@@ -421,15 +421,15 @@ class SessionManager {
         });
 
         //trim response for heavy response commands like getPageSource
-        logger.info(`Deciding if we need to trim response for command for ${command.commandName} command in session ${this.sessionInfo.session_id}`);
+        pluginLogger.info(`Deciding if we need to trim response for command for ${command.commandName} command in session ${this.sessionInfo.session_id}`);
         if( this.config.dontSaveResponseForCommands.indexOf(command.commandName) <  0){
-          logger.info(`Trimming response for command for ${command.commandName} command in session ${this.sessionInfo.session_id}`);
+          pluginLogger.info(`Trimming response for command for ${command.commandName} command in session ${this.sessionInfo.session_id}`);
           parsedLog.response = "trimmed for efficiency";
         }
         await commandLogsModel.create(parsedLog as any);
       }
     } catch (err) {
-      logger.error(err);
+      pluginLogger.error(err);
     }
   }
 
