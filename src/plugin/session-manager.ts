@@ -422,10 +422,14 @@ class SessionManager {
 
         //trim response for heavy response commands like getPageSource
         logger.info(`Deciding if we need to trim response for command for ${command.commandName} command in session ${this.sessionInfo.session_id}`);
-        if( this.config.dontSaveResponseForCommands.indexOf(command.commandName) >= 0){
+        if( this.config.dontSaveResponseForCommands.includes(command.commandName)){
           logger.info(`Trimming response for command for ${command.commandName} command in session ${this.sessionInfo.session_id}`);
-          parsedLog.response = "trimmed for efficiency";
+          parsedLog.response = JSON.stringify({
+            type: "string",
+            value: `[TRIMMED] ${command.commandName} response is too large; see raw logs`,
+          });
         }
+
         await commandLogsModel.create(parsedLog as any);
       }
     } catch (err) {
