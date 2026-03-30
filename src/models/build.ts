@@ -56,6 +56,12 @@ class Build extends Model<Build> {
   })
   platform_name!: string;
 
+  @AllowNull(true)
+  @Column({
+    type: DataTypes.TEXT,
+  })
+  app_version?: string | null;
+
 }
 
 export { Build };

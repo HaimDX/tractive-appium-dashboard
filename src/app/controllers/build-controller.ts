@@ -128,6 +128,7 @@ export class BuildController extends BaseController {
         platform_name: build.platform_name,
         session_count: build.sessions?.length || 0,
         created_at: build.createdAt,
+        app_version: build.app_version,
       };
 
       this.sendSuccessResponse(response, data);

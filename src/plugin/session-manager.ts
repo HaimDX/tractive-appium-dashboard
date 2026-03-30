@@ -246,6 +246,16 @@ class SessionManager {
       let { is_profiling_available, device_info } = await this.startAppProfiling();
       await this.startHttpLogsCapture();
 
+      /* Add app version (and build number for ios) */
+      let appVersion;
+      try {
+        appVersion = await getAppVersion(this.sessionInfo.platform_name);
+        pluginLogger.info("App under test version is " + appVersion);
+      }catch (error){
+        pluginLogger.error("Could not determine app under test version");
+      }
+
+
 
       /* Build & Project Tractive Caps */
       if (projectName) {
@@ -258,16 +268,8 @@ class SessionManager {
             projectId: project?.id ,
             user : user || 'unknown user',
             platformName : this.sessionInfo.platform_name || 'unknown platform',
+            appVersion : appVersion || 'unknown version',
           });
-      }
-
-      //Add app version
-      let appVersion;
-      try {
-        appVersion = await getAppVersion(this.sessionInfo.platform_name);
-        pluginLogger.info("App under test version is " + appVersion);
-      }catch (error){
-        pluginLogger.error("Could not determine app under test version");
       }
 
       /**

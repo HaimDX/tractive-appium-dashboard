@@ -5,7 +5,7 @@ module.exports = {
     return promise.each(
       [
         function () {
-          return queryInterface.addColumn("builds", "platform_name", {
+          return queryInterface.addColumn("builds", "app_version", {
             type: Sequelize.TEXT,
             allowNull: true,
           });

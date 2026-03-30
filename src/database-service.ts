@@ -21,11 +21,13 @@ async function getOrCreateNewBuild({
   projectId,
   user,
   platformName,
+  appVersion,
 }: {
   buildName: string;
   projectId?: number;
   user? : string;
   platformName: string,
+  appVersion: string
 }): Promise<Build> {
   let existingBuild = await Build.findOne({
     where: {
@@ -40,7 +42,8 @@ async function getOrCreateNewBuild({
       build_id: uuidv4(),
       project_id: projectId || null,
       user : user || null,
-      platform_name : platformName
+      platform_name : platformName,
+      app_version: appVersion
     } as any);
   }
   return existingBuild;
