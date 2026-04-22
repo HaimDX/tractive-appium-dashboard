@@ -56,13 +56,16 @@ const Header = styled.div`
 const HeaderTab = styled.div<{ active?: boolean }>`
   padding: 5px 5px 0 5px;
   background: ${(props) =>
+    props.active ? "rgba(91, 127, 255, 0.15)" : "transparent"};
+  color: ${(props) =>
     props.active
-      ? chroma(props.theme.colors.primary).brighten(2).hex()
-      : "transparent"};
-  border-radius: 1px;
+      ? props.theme.colors.tab_active_header
+      : props.theme.colors.greyscale[2]};
+  border-radius: 4px;
   cursor: pointer;
   font-weight: 600;
   padding-bottom: 5px;
+  transition: background 0.15s, color 0.15s;
 `;
 
 const LogBody = styled.div<{ height: string }>`

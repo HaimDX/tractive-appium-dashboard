@@ -39,7 +39,7 @@ import {
 import BuildListFilter from "./build-list-filter";
 
 const Container = styled.div`
-  border-right: 1px solid #ced8e1;
+  border-right: 1px solid ${(props) => props.theme.colors.border};
   width: 100%;
 `;
 

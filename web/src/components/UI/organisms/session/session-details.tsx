@@ -71,15 +71,16 @@ const Name = styled.div`
 `;
 
 const ErrorContainer = styled.div`
-  border: 1px solid ${(props) => chroma(props.theme.colors.error).hex()};
-  border-left: 5px solid ${(props) => chroma(props.theme.colors.error).hex()};
-  background: ${(props) =>
-    chroma(props.theme.colors.error).brighten(3.5).hex()};
+  border: 1px solid rgba(244, 88, 88, 0.3);
+  border-left: 5px solid ${(props) => props.theme.colors.error};
+  background: rgba(244, 88, 88, 0.08);
+  color: ${(props) => props.theme.colors.error};
   border-radius: ${(props) => props.theme.borderRadius.M};
   overflow: scroll;
   padding: 10px;
   margin: 0 15px 0 15px;
   z-index: 1;
+  font-size: 13px;
 `;
 
 const ProgressIndicator = styled.div`

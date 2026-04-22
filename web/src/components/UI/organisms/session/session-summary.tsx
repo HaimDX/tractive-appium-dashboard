@@ -105,7 +105,7 @@ const Label = styled.div`
   margin-right: 20px;
   font-size: 13px;
   font-weight: 600;
-  color: rgb(116, 114, 114);
+  color: ${(props) => props.theme.colors.greyscale[2]};
   min-width: 95px;
   text-overflow: ellipsis;
 `;

@@ -30,7 +30,7 @@ import Utils from "../../../../utils/common-utils";
 import Session from "../../../../interfaces/session";
 
 const Container = styled.div`
-    border-right: 1px solid #ced8e1;
+    border-right: 1px solid ${(props) => props.theme.colors.border};
     width: 100%;
 `;
 

@@ -22,16 +22,16 @@ const ParamsContainer = styled.div`
 const ParamsTitle = styled.div`
   padding-bottom: 10px;
   font-size: 11px;
-  color: grey;
+  color: ${(props) => props.theme.colors.greyscale[2]};
   font-weight: 900;
   text-transform: uppercase;
 `;
 
 const ErrorContainer = styled(ParamsContainer)`
-  border: 1px solid ${(props) => chroma(props.theme.colors.error).hex()};
-  border-left: 5px solid ${(props) => chroma(props.theme.colors.error).hex()};
-  background: ${(props) =>
-    chroma(props.theme.colors.error).brighten(3.5).hex()};
+  border: 1px solid rgba(244, 88, 88, 0.3);
+  border-left: 5px solid ${(props) => props.theme.colors.error};
+  background: rgba(244, 88, 88, 0.08);
+  color: ${(props) => props.theme.colors.error};
 
   & .text-log-params-json-entry-key {
     text-transform: capitalize;
@@ -39,10 +39,10 @@ const ErrorContainer = styled(ParamsContainer)`
 `;
 
 const WarningContainer = styled(ErrorContainer)`
-  border: 1px solid ${(props) => chroma(props.theme.colors.warning).hex()};
-  border-left: 5px solid ${(props) => chroma(props.theme.colors.warning).hex()};
-  background: ${(props) =>
-    chroma(props.theme.colors.warning).brighten(3.5).hex()};
+  border: 1px solid rgba(232, 193, 74, 0.3);
+  border-left: 5px solid ${(props) => props.theme.colors.warning};
+  background: rgba(232, 193, 74, 0.08);
+  color: ${(props) => props.theme.colors.warning};
 `;
 
 const StringValue = styled.div`

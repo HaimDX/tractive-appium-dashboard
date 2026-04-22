@@ -17,9 +17,11 @@ import ReduxActionTypes from "./store/redux-action-types";
 import { getSelectedTheme } from "./store/selectors/ui/theme-selector";
 
 const Container = styled.div`
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   font-size: ${(props) => props.theme.fonts.size.L};
   color: ${(props) => props.theme.colors.greyscale[0]};
   background: ${(props) => props.theme.colors.greyscale[6]};
+  min-height: 100vh;
 `;
 
 type PropsType = {

@@ -1,71 +1,118 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;500;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+:root {
+  --bg: #0c0d12;
+  --surface: #13151d;
+  --surface-2: #1a1d28;
+  --surface-3: #22263a;
+  --border: #1f2235;
+  --primary: #5b7fff;
+  --primary-hover: #7090ff;
+  --primary-glow: rgba(91, 127, 255, 0.28);
+  --text: #dde1ef;
+  --text-2: #8892a8;
+  --text-3: #4a5068;
+  --success: #2dd975;
+  --success-dim: rgba(45, 217, 117, 0.11);
+  --error: #f45858;
+  --error-dim: rgba(244, 88, 88, 0.11);
+  --blue-dim: rgba(91, 127, 255, 0.11);
+  --radius: 12px;
+  --radius-sm: 8px;
+}
+
+* {
+  box-sizing: border-box;
+}
 
 body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre,
 form, fieldset, input, p, blockquote, table, th, td, embed, object {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 table {
-    border-collapse: collapse;
-    border-spacing: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
 }
 
 fieldset, img, abbr {
-    border: 0;
-}
-
-address, caption, cite, code, dfn, em,
-h1, h2, h3, h4, h5, h6, strong, th, var {
-    font-weight: normal;
-    font-style: normal;
+  border: 0;
 }
 
 ul {
-    list-style: none;
+  list-style: none;
 }
 
 caption, th {
-    text-align: left;
+  text-align: left;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-size: 1.0em;
-}
-
-q:before, q:after {
-    content: '';
+  font-size: 1.0em;
+  font-weight: normal;
 }
 
 a, ins {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-    font-size: 12px;
-    color: #111;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+a {
+  color: var(--primary);
+}
+
+a:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}
+
+html, body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .MuiMenuItem-root {
-    font-size: 12px !important;
+  font-size: 12px !important;
+  background-color: var(--surface-2) !important;
+  color: var(--text) !important;
+}
+
+.MuiMenuItem-root:hover {
+  background-color: var(--surface-3) !important;
+}
+
+.MuiPaper-root {
+  background-color: var(--surface-2) !important;
+  color: var(--text) !important;
+  border: 1px solid var(--border) !important;
 }
 
 .custom-tooltip-container {
-    background-color: #000 !important;
-    height: 30px;
-    min-width: 50px;
-    display: flex;
-    align-items: center;
-    font-size: 12px !important;
+  background-color: var(--surface-3) !important;
+  height: 30px;
+  min-width: 50px;
+  display: flex;
+  align-items: center;
+  font-size: 12px !important;
+  color: var(--text) !important;
 }
 
 .custom-tooltip-arrow {
-    color: #000 !important;
+  color: var(--surface-3) !important;
+}
+
+/* MUI Tooltip */
+.MuiTooltip-tooltip {
+  background-color: var(--surface-3) !important;
+  color: var(--text) !important;
+  font-size: 12px !important;
+  border: 1px solid var(--border) !important;
+}
+
+.MuiTooltip-arrow {
+  color: var(--surface-3) !important;
 }
