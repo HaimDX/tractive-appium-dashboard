@@ -11,4 +11,7 @@ export default function* () {
   yield put({
     type: ReduxActionTypes.POLLING_INIT,
   });
+  yield put({
+    type: ReduxActionTypes.INIT_METRICS_SAGA,
+  });
 }

@@ -24,3 +24,5 @@ export const getBuildDetailsUrl = (id: string) => {
 export const getBaseUrl = () => {
   return `${BASE_URL}`;
 };
+
+export const METRICS_URL = `${BASE_URL}/metrics`;

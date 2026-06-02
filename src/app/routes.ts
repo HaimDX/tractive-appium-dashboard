@@ -9,6 +9,7 @@ export let registerRoutes = (apiRouter: Router, config: Config, dependencies: an
     ["/builds", new apiControllers.BuildController()],
     ["/projects", new apiControllers.ProjectController()],
     ["/debug", new apiControllers.DebugController(dependencies.debugEventEmitter)],
+    ["/metrics", new apiControllers.MetricsController()],
   ];
 
   for (let [path, controller] of controllers) {

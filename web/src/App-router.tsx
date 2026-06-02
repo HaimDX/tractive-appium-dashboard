@@ -8,9 +8,10 @@ import {
 } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Dashboard from "./components/pages/dashboard";
+import Metrics from "./components/pages/metrics";
 import PageNotFound from "./components/pages/page-not-found";
 import AppLoader from "./components/UI/molecules/app-loader";
-import { BASE_URL } from "./constants/routes";
+import { BASE_URL, METRICS_URL } from "./constants/routes";
 import { ThemeConfig } from "./constants/themes";
 import { AppState } from "./store";
 import ReduxActionTypes from "./store/redux-action-types";
@@ -44,6 +45,7 @@ function AppRouter(props: PropsType) {
         {isAppInitialised ? (
           <Router>
             <Switch>
+              <Route path={METRICS_URL} component={Metrics} />
               <Route path={BASE_URL} component={Dashboard} />
               <Route component={PageNotFound} />
             </Switch>

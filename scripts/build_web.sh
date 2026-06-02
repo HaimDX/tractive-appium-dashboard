@@ -10,7 +10,7 @@ yarn install
 export REACT_APP_API_BASE_URL="/dashboard"
 
 # Build the project
-yarn run build
+npm run build
 
 # Navigate back to the root directory
 cd ..

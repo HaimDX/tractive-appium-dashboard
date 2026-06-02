@@ -58,3 +58,33 @@
   color: var(--text);
   text-decoration: none;
 }
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 24px;
+  margin-right: auto;
+}
+
+.header-nav-link {
+  color: #8892a8;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  transition: background 0.15s, color 0.15s;
+}
+
+.header-nav-link:hover,
+.header-nav-link:focus {
+  color: #dde1ef;
+  background-color: rgba(91, 127, 255, 0.08);
+  text-decoration: none;
+}
+
+.header-nav-link--active {
+  color: #dde1ef;
+  background-color: rgba(91, 127, 255, 0.15);
+}
